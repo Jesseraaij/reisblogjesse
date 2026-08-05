@@ -3,6 +3,7 @@ backend:
   repo: Jesseraaij/reisblogjesse
   branch: main
   use_pkce: true # Dit zorgt ervoor dat inloggen veilig werkt via Cloudflare
+  app_id: Ov23li31OlxsOnqTuE08
 
 media_folder: "fotos" # De map waar je foto's al in staan
 public_folder: "/fotos"
