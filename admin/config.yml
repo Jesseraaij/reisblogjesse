@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: Jesseraaij/reisblogjesse
+  branch: main
+  use_pkce: true # Dit zorgt ervoor dat inloggen veilig werkt via Cloudflare
+
+media_folder: "fotos" # De map waar je foto's al in staan
+public_folder: "/fotos"
+
+collections:
+  - name: "reizen"
+    label: "Reisverhalen"
+    folder: "verhalen" # Het mapje waar de teksten straks stiekem opgeslagen worden
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Titel", name: "title", widget: "string"}
+      - {label: "Datum", name: "date", widget: "datetime"}
+      - {label: "Omslagfoto", name: "thumbnail", widget: "image", required: false}
+      - {label: "Jouw Verhaal", name: "body", widget: "markdown"}
