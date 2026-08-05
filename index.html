@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Socials | Jesse</title>
+    <style>
+        body {
+            background-image: url('afbeeldingen/achtergrond.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 45px;
+            color: #ffffff;
+            /* Dit zorgt voor een superstrakke zwarte omlijning om de letters */
+            -webkit-text-stroke: 2px #000000;
+            margin-bottom: 40px;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .link-container {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .link-knop {
+            background-color: #cccccc;
+            color: #000000;
+            text-decoration: none;
+            padding: 15px 20px;
+            border: 2px solid #777777;
+            border-radius: 6px;
+            font-size: 24px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .link-knop:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+            z-index: 10;
+        }
+
+        .icoon {
+            position: absolute;
+            left: 15px;
+            height: 30px;
+            width: auto;
+        }
+
+        .disclaimer-link {
+            margin-top: 50px;
+            color: #ffffff;
+            font-size: 12px;
+            text-decoration: none;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            transition: color 0.2s ease;
+        }
+
+        .disclaimer-link:hover {
+            text-decoration: underline;
+            color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mijn Socials</h1>
+
+    <div class="link-container">
+	<!-- De nieuwe 'Over Mij' knop -->
+        <a href="overmij.html" class="link-knop">Over Mij</a>
+        <a href="https://www.linkedin.com/in/jesse-raaijmakers-30aba32b5" target="_blank" rel="noopener noreferrer" class="link-knop">
+            <img src="afbeeldingen/LinkedIn.png" alt="LinkedIn" class="icoon">
+            LinkedIn
+        </a>
+        <a href="https://www.instagram.com/jesse.raaij/" target="_blank" rel="noopener noreferrer" class="link-knop">
+            <img src="afbeeldingen/Instagram.png" alt="Instagram" class="icoon">
+            Instagram
+        </a>
+        
+        <a href="#" class="link-knop">Portfoliopagina (Binnenkort)</a>
+        <a href="reisblog.html" class="link-knop">Reisblog</a>
+    </div>
+
+    <!-- De link hieronder opent nu netjes in een nieuw tabblad -->
+    <a href="disclaimer.html" target="_blank" rel="noopener noreferrer" class="disclaimer-link">Disclaimer & Auteursrechten</a>
+
+</body>
+</html>

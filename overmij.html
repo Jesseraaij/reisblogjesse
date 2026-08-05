@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over Mij | Jesse Raaijmakers</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('afbeeldingen/achtergrond.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #333;
+            display: flex;
+        }
+
+        /* --- DE SIDEBAR (ZIJMENU) --- */
+        .sidebar {
+            width: 250px;
+            background-color: #222;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+            color: #fff;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #444;
+            margin: 10px 25px;
+        }
+
+        /* --- HET HOOFDGEDEELTE --- */
+        .main-content {
+            margin-left: 250px; 
+            padding: 40px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column; /* Zorgt dat foto en tekst onder elkaar staan */
+            align-items: center;    /* Centreert alles op het scherm */
+        }
+
+        /* --- LOSSE, GROTERE PROFIELFOTO --- */
+        .profiel-foto {
+            width: 180px;  /* Groter gemaakt */
+            height: 180px; /* Groter gemaakt */
+            object-fit: cover;
+            object-position: center top; 
+            border-radius: 50%; 
+            border: 6px solid #fff; /* Iets dikkere rand voor een stickereffect */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-bottom: -50px; /* Trekt de foto naar beneden over het papier heen */
+            position: relative;
+            z-index: 10; /* Zorgt dat hij BÓVEN het papier ligt */
+        }
+
+        /* --- UITGESCHEURDE PAGINA EFFECT --- */
+        .paper-wrapper {
+            width: 100%;
+            max-width: 800px;
+            /* Drop-shadow volgt de vorm van de kartelrand, box-shadow doet dat niet */
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.3)); 
+            margin-bottom: 40px;
+        }
+
+        .torn-paper {
+            background-color: #ffffff;
+            padding: 80px 40px 40px 40px; /* 80px top padding zodat de foto de tekst niet raakt */
+            position: relative;
+            color: #333;
+        }
+
+        /* Kartelrand bovenaan */
+        .torn-paper::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(-45deg, #ffffff 25%, transparent 25%), 
+                        linear-gradient(45deg, #ffffff 25%, transparent 25%);
+            background-size: 20px 20px;
+            background-position: left top;
+        }
+
+        /* Kartelrand onderaan */
+        .torn-paper::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(-45deg, transparent 75%, #ffffff 75%), 
+                        linear-gradient(45deg, transparent 75%, #ffffff 75%);
+            background-size: 20px 20px;
+            background-position: left bottom;
+        }
+
+        h1 {
+            color: #111;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 16px;
+            color: #444;
+            text-align: left;
+        }
+
+        /* --- MOBIELE WEERGAVE --- */
+        .menu-knop {
+            display: none;
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            font-size: 24px;
+            cursor: pointer;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .menu-knop {
+                display: block; 
+            }
+            .sidebar {
+                transform: translateX(-100%); 
+                padding-top: 60px; 
+            }
+            .sidebar.open {
+                transform: translateX(0); 
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 100px 20px 20px 20px; /* Iets meer ruimte boven voor de mobiele knop */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="menu-knop" onclick="toggleMenu()">☰ Menu</button>
+
+    <div class="sidebar" id="mijnMenu">
+        <a href="index.html">🏠 Mijn Socials</a>
+        <a href="overmij.html">👤 Over Mij</a>
+        <a href="reisblog.html">📸 Mijn Reisblog</a>
+        
+        <div class="divider"></div>
+    </div>
+
+    <div class="main-content">
+        <!-- De profielfoto staat nu los bovenaan -->
+        <img src="afbeeldingen/ik.jpg" alt="Jesse Raaijmakers" class="profiel-foto">
+        
+        <!-- De wrapper met het papier-effect -->
+        <div class="paper-wrapper">
+            <div class="torn-paper">
+                <h1>Over Mij</h1>
+                <p>Hoi! Mijn naam is Jesse Raaijmakers. Momenteel studeer ik Human Resource Management op Avans Breda. Op deze website vind je straks mijn portfolio pagina en mijn reisblog!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("mijnMenu").classList.toggle("open");
+        }
+    </script>
+
+</body>
+</html>

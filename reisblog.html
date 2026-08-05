@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijn Reisblog | Jesse Raaijmakers</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+        }
+
+        /* --- DE SIDEBAR (ZIJMENU) --- */
+        .sidebar {
+            width: 250px;
+            background-color: #222;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #444;
+            color: #fff;
+        }
+        
+        .sidebar-sub {
+            padding-left: 45px !important;
+            font-size: 14px !important;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #444;
+            margin: 10px 25px;
+        }
+
+        .menu-icoon {
+            height: 20px;
+            width: auto;
+            margin-right: 15px;
+        }
+
+        /* --- HET HOOFDGEDEELTE --- */
+        .main-content {
+            margin-left: 250px; 
+            padding: 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        p.intro {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* --- REIS OVERZICHT GRID (TEGELS) --- */
+        .reis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .reis-tegel {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            max-width: 350px;
+        }
+
+        .reis-tegel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .reis-tegel img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .reis-tegel-tekst {
+            padding: 20px;
+        }
+
+        .reis-tegel-tekst h2 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #111;
+        }
+
+        .reis-tegel-tekst p {
+            margin: 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* --- MOBIELE WEERGAVE --- */
+        .menu-knop {
+            display: none;
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            font-size: 24px;
+            cursor: pointer;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .menu-knop {
+                display: block; 
+            }
+            .sidebar {
+                transform: translateX(-100%); 
+                padding-top: 60px; 
+            }
+            .sidebar.open {
+                transform: translateX(0); 
+            }
+            .main-content {
+                margin-left: 0;
+                padding-top: 80px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="menu-knop" onclick="toggleMenu()">☰ Menu</button>
+
+    <div class="sidebar" id="mijnMenu">
+        <a href="index.html">🏠 Mijn Socials</a>
+        <a href="overmij.html">👤 Over Mij</a>
+        <a href="reisblog.html" class="active">🌍 Mijn Reisblog</a>
+        
+        <!-- Sub-menu items (Chronologische volgorde) -->
+        <a href="amerika.html" class="sidebar-sub">🇺🇸 West-Amerika (2023)</a>
+        <a href="malta.html" class="sidebar-sub">🇲🇹 Malta (2026)</a>
+        
+        <div class="divider"></div>
+        
+        <a href="https://www.polarsteps.com/JesseRaaijmakers" target="_blank" rel="noopener noreferrer">
+            <img src="afbeeldingen/polarsteps.png" alt="Polarsteps" class="menu-icoon">
+            Polarsteps Tracker
+        </a>
+    </div>
+
+    <div class="main-content">
+        <h1>Mijn Reizen</h1>
+        <p class="intro">Welkom op mijn reisblog! Hier houd ik de foto's en verhalen bij van mijn reizen. Klik hieronder op een reis om de galerij te openen.</p>
+
+        <!-- Het grid waar alle reistegels in staan (Amerika eerst, dan Malta) -->
+        <div class="reis-grid">
+            <!-- West-Amerika Tegel -->
+            <a href="amerika.html" class="reis-tegel">
+                <img src="afbeeldingen/reisblog/amerika/usaflag.png" alt="Vlag van Verenigde Staten">
+                <div class="reis-tegel-tekst">
+                    <h2>West-Amerika 2023</h2>
+                    <p>Een onvergetelijke rondreis door het westen van de Verenigde Staten.</p>
+                </div>
+            </a>
+
+            <!-- Malta Tegel -->
+            <a href="malta.html" class="reis-tegel">
+                <img src="afbeeldingen/maltavlag.png" alt="Vlag van Malta">
+                <div class="reis-tegel-tekst">
+                    <h2>Malta 2026</h2>
+                    <p>Mijn reis naar de Middellandse Zee.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("mijnMenu").classList.toggle("open");
+        }
+    </script>
+
+</body>
+</html>

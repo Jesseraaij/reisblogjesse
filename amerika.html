@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rondreis West-Amerika 2023 | Jesse Raaijmakers</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+        }
+
+        /* --- DE SIDEBAR (ZIJMENU) --- */
+        .sidebar {
+            width: 250px;
+            background-color: #222;
+            color: #fff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #444;
+            color: #fff;
+        }
+        
+        .sidebar-sub {
+            padding-left: 45px !important;
+            font-size: 14px !important;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #444;
+            margin: 10px 25px;
+        }
+
+        .menu-icoon {
+            height: 20px;
+            width: auto;
+            margin-right: 15px;
+        }
+
+        /* --- HET HOOFDGEDEELTE --- */
+        .main-content {
+            margin-left: 250px; 
+            padding: 40px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* --- FOTO GRID STIJLEN --- */
+        .foto-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .foto-item {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+        }
+
+        .foto-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        /* --- LIGHTBOX (VERGROOTTE FOTO WEERGAVE) --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 6px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-sluit {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .lightbox-sluit:hover {
+            color: #bbb;
+        }
+
+        .lightbox-tekst {
+            color: #ccc;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* --- MOBIELE WEERGAVE --- */
+        .menu-knop {
+            display: none;
+            background-color: #222;
+            color: #fff;
+            border: none;
+            padding: 15px 20px;
+            font-size: 24px;
+            cursor: pointer;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: left;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .menu-knop {
+                display: block; 
+            }
+            .sidebar {
+                transform: translateX(-100%); 
+                padding-top: 60px; 
+            }
+            .sidebar.open {
+                transform: translateX(0); 
+            }
+            .main-content {
+                margin-left: 0;
+                padding-top: 80px; 
+            }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <button class="menu-knop" onclick="toggleMenu()">☰ Menu</button>
+
+    <div class="sidebar" id="mijnMenu">
+        <a href="index.html">🏠 Mijn Socials</a>
+        <a href="overmij.html">👤 Over Mij</a>
+        <a href="reisblog.html">🌍 Mijn Reisblog</a>
+        
+        <!-- Sub-menu items (USA eerst, dan Malta) -->
+        <a href="amerika.html" class="sidebar-sub active">🇺🇸 West-Amerika (2023)</a>
+        <a href="malta.html" class="sidebar-sub">🇲🇹 Malta (2026)</a>
+        
+        <div class="divider"></div>
+        
+        <a href="https://www.polarsteps.com/JesseRaaijmakers" target="_blank" rel="noopener noreferrer">
+            <img src="afbeeldingen/polarsteps.png" alt="Polarsteps" class="menu-icoon">
+            Polarsteps Tracker
+        </a>
+    </div>
+
+    <div class="main-content">
+        <h1>Rondreis West-Amerika 2023</h1>
+        <p>Klik op een foto om deze in het groot te bekijken.</p>
+
+        <!-- HET FOTOGRID -->
+        <div class="foto-grid">
+            <img src="afbeeldingen/reisblog/amerika/amerika1.jpg" alt="Amerika Foto 1" class="foto-item">
+            <img src="afbeeldingen/reisblog/amerika/amerika2.jpg" alt="Amerika Foto 2" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika3.jpg" alt="Amerika Foto 3" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika4.jpg" alt="Amerika Foto 4" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika5.jpg" alt="Amerika Foto 5" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika6.jpg" alt="Amerika Foto 6" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika7.jpg" alt="Amerika Foto 7" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika8.jpg" alt="Amerika Foto 8" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika9.jpg" alt="Amerika Foto 9" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika10.jpg" alt="Amerika Foto 10" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika11.jpg" alt="Amerika Foto 11" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika12.jpg" alt="Amerika Foto 12" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika13.jpg" alt="Amerika Foto 13" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika14.jpg" alt="Amerika Foto 14" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika15.jpg" alt="Amerika Foto 15" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika16.jpg" alt="Amerika Foto 16" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika17.jpg" alt="Amerika Foto 17" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika18.jpg" alt="Amerika Foto 18" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika19.jpg" alt="Amerika Foto 19" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika20.jpg" alt="Amerika Foto 20" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika21.jpg" alt="Amerika Foto 21" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika22.jpg" alt="Amerika Foto 22" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika23.jpg" alt="Amerika Foto 23" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika24.jpg" alt="Amerika Foto 24" class="foto-item">
+			<img src="afbeeldingen/reisblog/amerika/amerika25.jpg" alt="Amerika Foto 25" class="foto-item">
+            <!-- Voeg hieronder straks makkelijk meer foto's toe -->
+        </div>
+    </div>
+
+    <!-- De pop-up (Lightbox) -->
+    <div class="lightbox" id="mijnLightbox" onclick="sluitLightbox()">
+        <span class="lightbox-sluit">&times;</span>
+        <img id="lightboxImg" src="" alt="Vergrote foto">
+        <div class="lightbox-tekst">© Jesse Raaijmakers - Alle rechten voorbehouden</div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("mijnMenu").classList.toggle("open");
+        }
+
+        const fotos = document.querySelectorAll('.foto-grid .foto-item');
+        const lightbox = document.getElementById("mijnLightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+
+        fotos.forEach(foto => {
+            foto.addEventListener('click', function() {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src; 
+            });
+        });
+
+        function sluitLightbox() {
+            lightbox.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
