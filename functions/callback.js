@@ -4,7 +4,7 @@ export async function onRequestGet(context) {
     const code = url.searchParams.get("code");
     
     const clientId = "Ov23li31OlxsOnqTuE08";
-    const clientSecret = "JOUW_ECHTE_GEHEIME_CLIENT_SECRET_HIER";
+    const clientSecret = "348e4ef78e4e8440a77020684dc22b48f149e2a1";
 
     if (!code) {
       return new Response("Fout: Geen autorisatiecode ontvangen van GitHub.", { status: 400 });
