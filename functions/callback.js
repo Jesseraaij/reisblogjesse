@@ -3,7 +3,7 @@ export async function onRequestGet(context) {
   const code = url.searchParams.get("code");
 
   const clientId = "Ov23li31OlxsOnqTuE08";
-  const clientSecret = "DIT_WAS_JOUW_CLIENT_SECRET"; // Zorg dat hier jouw echte client secret staat!
+  const clientSecret = "348e4ef78e4e8440a77020684dc22b48f149e2a1"; // Zorg dat hier jouw echte client secret staat!
 
   const response = await fetch("https://github.com/login/oauth/access_token", {
     method: "POST",
