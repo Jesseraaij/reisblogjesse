@@ -2,7 +2,8 @@ backend:
   name: github
   repo: Jesseraaij/reisblogjesse
   branch: main
-  app_id: Ov23li31OlxsOnqTuE08
+  base_url: https://reisblogjesse.pages.dev
+  auth_endpoint: auth
 
 media_folder: "fotos"
 public_folder: "/fotos"
