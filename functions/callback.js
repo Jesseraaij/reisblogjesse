@@ -4,7 +4,7 @@ export async function onRequestGet(context) {
   
   const clientId = "Ov23li31OlxsOnqTuE08";
   // Als je een Client Secret hebt, kun je die hier invullen (tussen de quotes), anders laten we hem leeg of vangen we het op
-  const clientSecret = context.env.GITHUB_CLIENT_SECRET || "";
+  const clientSecret = "JOUW_ECHTE_CLIENT_SECRET_HIER";
 
   if (!code) {
     return new Response("Geen autorisatiecode ontvangen van GitHub.", { status: 400 });
