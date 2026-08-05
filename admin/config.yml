@@ -2,16 +2,15 @@ backend:
   name: github
   repo: Jesseraaij/reisblogjesse
   branch: main
-  base_url: https://reisblogjesse.pages.dev
-  auth_endpoint: api/auth
+  app_id: Ov23li31OlxsOnqTuE08
 
-media_folder: "fotos" # De map waar je foto's al in staan
+media_folder: "fotos"
 public_folder: "/fotos"
 
 collections:
   - name: "reizen"
     label: "Reisverhalen"
-    folder: "verhalen" # Het mapje waar de teksten straks stiekem opgeslagen worden
+    folder: "verhalen"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
