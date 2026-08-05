@@ -10,14 +10,15 @@ export async function onRequestGet(context) {
       return new Response("Fout: Geen autorisatiecode ontvangen van GitHub.", { status: 400 });
     }
 
-    // Vraag het access token op bij GitHub
+    // Vraag het access token op als URL-encoded formulier (dit vindt GitHub fijnste)
     const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
       method: "POST",
       headers: {
-        "content-type": "application/json",
-        "accept": "json"
+        "content-type": "application/x-www-form-urlencoded",
+        "accept": "application/json",
+        "user-agent": "Cloudflare-Pages-Worker"
       },
-      body: JSON.stringify({
+      body: new URLSearchParams({
         client_id: clientId,
         client_secret: clientSecret,
         code: code
@@ -29,7 +30,6 @@ export async function onRequestGet(context) {
     try {
       tokenData = JSON.parse(tokenText);
     } catch (e) {
-      // Als GitHub URL-encoded terugkomt in plaats van JSON
       const params = new URLSearchParams(tokenText);
       tokenData = { access_token: params.get("access_token"), error: params.get("error") };
     }
@@ -43,22 +43,24 @@ export async function onRequestGet(context) {
       });
     }
 
-    // Stuur het token netjes terug naar het CMS venster
     const html = `
       <!doctype html>
       <html>
-        <head><title>Authentication Success</title></head>
+        <head><title>Bezig met inloggen...</title></head>
         <body>
+          <p>Inloggen gelukt! Venster sluiten...</p>
           <script>
-            const receiveMessage = (message) => {
-              window.opener.postMessage(
-                "authorization:github:success:${JSON.stringify({ token: token, provider: "github" })}",
-                message.origin
-              );
-              window.removeEventListener("message", receiveMessage, false);
-            };
-            window.addEventListener("message", receiveMessage, false);
-            window.opener.postMessage("authorizing:github", "*");
+            try {
+              if (window.opener) {
+                window.opener.postMessage("authorization:github:success:${JSON.stringify({ token: token, provider: "github" })}", "*");
+                window.close();
+              } else {
+                localStorage.setItem("netlify-cms-user", JSON.stringify({ token: "${token}", backend: { name: "github" } }));
+                window.location.href = "/admin/";
+              }
+            } catch (e) {
+              window.location.href = "/admin/";
+            }
           </script>
         </body>
       </html>
