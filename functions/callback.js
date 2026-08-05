@@ -31,24 +31,26 @@ export async function onRequestGet(context) {
       return new Response(`GitHub weigerde het token: ${JSON.stringify(data)}`, { status: 400 });
     }
 
+    // Dit script stuurt het token door en geeft een duidelijke knop als de browser weigert te sluiten
     const html = `
       <!doctype html>
       <html>
-        <head><title>Authenticatie gelukt</title></head>
-        <body>
+        <head><title>Inloggen gelukt</title></head>
+        <body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
+          <h2>Inloggen gelukt! 🎉</h2>
+          <p>Je kunt dit venster sluiten of op de knop hieronder klikken.</p>
+          <p><a href="/admin/" target="_parent" style="background: #24292e; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Ga naar Dashboard</a></p>
           <script>
-            const receiveMessage = (message) => {
-              window.opener.postMessage(
-                'authorization:github:success:${JSON.stringify({ token: token, provider: 'github' })}',
-                message.origin
-              );
-              window.removeEventListener("message", receiveMessage, false);
+            const content = {
+              token: "${token}",
+              provider: "github"
+            };
+            if (window.opener) {
+              window.opener.postMessage("authorization:github:success:" + JSON.stringify(content), "*");
             }
-            window.addEventListener("message", receiveMessage, false);
-            window.opener.postMessage("authorization:github:success:${JSON.stringify({ token: token, provider: 'github' })}", "*");
-            window.close();
+            // Probeer alsnog automatisch te sluiten
+            setTimeout(() => { window.close(); }, 500);
           </script>
-          <p>Inloggen gelukt! Dit venster sluit vanzelf...</p>
         </body>
       </html>
     `;
