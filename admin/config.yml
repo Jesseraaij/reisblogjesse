@@ -2,6 +2,7 @@ backend:
   name: github
   repo: Jesseraaij/reisblogjesse
   branch: main
+  auth_type: implicit
 
 media_folder: "fotos"
 public_folder: "/fotos"
