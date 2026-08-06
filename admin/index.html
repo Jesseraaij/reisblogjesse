@@ -6,38 +6,6 @@
     <title>Reisblog Dashboard</title>
   </head>
   <body>
-    <script>
-      window.CMS_MANUAL_INIT = true;
-    </script>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-      CMS.init({
-        config: {
-          backend: {
-            name: 'github',
-            repo: 'Jesseraaij/reisblogjesse',
-            branch: 'main',
-            auth_type: 'implicit'
-          },
-          media_folder: 'fotos',
-          public_folder: '/fotos',
-          collections: [
-            {
-              name: 'reizen',
-              label: 'Reisverhalen',
-              folder: 'verhalen',
-              create: true,
-              slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
-              fields: [
-                { label: 'Titel', name: 'title', widget: 'string' },
-                { label: 'Datum', name: 'date', widget: 'datetime' },
-                { label: 'Omslagfoto', name: 'thumbnail', widget: 'image', required: false },
-                { label: 'Jouw Verhaal', name: 'body', widget: 'markdown' }
-              ]
-            }
-          ]
-        }
-      });
-    </script>
   </body>
 </html>
