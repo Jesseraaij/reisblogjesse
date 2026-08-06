@@ -2,7 +2,8 @@ backend:
   name: github
   repo: Jesseraaij/reisblogjesse
   branch: main
-  # We halen base_url en auth_endpoint weg, want die hebben we niet meer nodig!
+  base_url: https://reisblogjesse.pages.dev
+  auth_endpoint: auth
 
 media_folder: "fotos"
 public_folder: "/fotos"
