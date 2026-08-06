@@ -31,25 +31,28 @@ export async function onRequestGet(context) {
       return new Response(`GitHub weigerde het token: ${JSON.stringify(data)}`, { status: 400 });
     }
 
-    // Dit script stuurt het token door en geeft een duidelijke knop als de browser weigert te sluiten
+    // Dit stuurt het token via de URL-hash direct naar de admin-pagina en sluit de popup automatisch
     const html = `
       <!doctype html>
       <html>
-        <head><title>Inloggen gelukt</title></head>
-        <body style="font-family: sans-serif; text-align: center; padding-top: 50px;">
-          <h2>Inloggen gelukt! 🎉</h2>
-          <p>Je kunt dit venster sluiten of op de knop hieronder klikken.</p>
-          <p><a href="/admin/" target="_parent" style="background: #24292e; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Ga naar Dashboard</a></p>
+        <head><title>Authenticatie voltooid</title></head>
+        <body>
+          <p>Inloggen gelukt! Doorsturen...</p>
           <script>
-            const content = {
-              token: "${token}",
-              provider: "github"
-            };
-            if (window.opener) {
-              window.opener.postMessage("authorization:github:success:" + JSON.stringify(content), "*");
-            }
-            // Probeer alsnog automatisch te sluiten
-            setTimeout(() => { window.close(); }, 500);
+            (function() {
+              const content = {
+                token: "${token}",
+                provider: "github"
+              };
+              
+              if (window.opener) {
+                // Stuur het bericht via postMessage én geef een fallback via de hash
+                window.opener.postMessage("authorization:github:success:" + JSON.stringify(content), "*");
+                window.close();
+              } else {
+                window.location.href = "/admin/#access_token=" + encodeURIComponent(content.token) + "&provider=github";
+              }
+            })();
           </script>
         </body>
       </html>
